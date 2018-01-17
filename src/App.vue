@@ -12,7 +12,7 @@
 
 export default {
   	components: {
-  		toolbar: Toolbar
+      toolbar: Toolbar
     },
   name: 'App'
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="toolbar">
+  <div id="toolbar" class="container-fluid">
     <img id="logo" src="@/assets/Din-Din Logo.png">
   </div>
 </template>
@@ -14,7 +14,6 @@
   @import '../../node_modules/bootstrap/less/bootstrap.less';
   @import '../less/variables.less';
   #toolbar {
-    width: 100%;
     height: 80px;
     background-color: @brand-brown;
   }
