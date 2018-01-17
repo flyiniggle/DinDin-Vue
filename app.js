@@ -1,8 +1,8 @@
 // Imports
-var path = require('path');
+const fs = require("fs");
 
-var express = require('express');
-var bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require("body-parser");
 
 
 // Setup
@@ -15,9 +15,23 @@ app.use(bodyParser.json({}));
 // Routes for static files
 
 // Routes for modules
-app.use("/meals", function(req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send({greeting: "haaaiiiiiii!!!!"});
+app.get("/meals", function(req, res) {
+  new Promise(function(resolve, reject) {
+    fs.readFile("./data/meals.json", (err, data) => {
+      if(err) reject(err);
+      resolve(data)
+    });
+  })
+    .then(JSON.parse)
+    .then(function(data) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.writeHead(400, {'Content-Type': 'application/json'});
+      res.send(err);
+    })
 });
 
 app.listen(3090, function() {
