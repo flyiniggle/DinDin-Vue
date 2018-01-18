@@ -17,7 +17,7 @@
 
       <div class="col-xs-4 align-middle">
       <div class="mealStat card-block">
-          <button type="button" class="btn btn-primary">Use it!</button>
+          <button type="button" class="btn btn-primary" @click="markUsed">Use it!</button>
         </div>
       </div>
     </div>
@@ -56,6 +56,12 @@
       },
       formattedLastUsed: function() {
         return new Date(this.meal.lastUsed).toDateString();
+      }
+    },
+    methods: {
+    	markUsed: function() {
+    		console.log(this.meal.index)
+        this.$emit("used", this.meal.id)
       }
     }
   }
