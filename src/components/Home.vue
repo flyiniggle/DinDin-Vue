@@ -16,36 +16,22 @@
 <script>
   import MealCard from "@/components/MealCard";
   import Overview from "@/components/Overview";
-export default {
-  components: {
-    Overview,
-    MealCard
-  },
-  data: function() {
-    return {
-    }
-  },
-  name: 'Home',
-  props: ["meals"]
-}
+  export default {
+    components: {
+      Overview,
+      MealCard
+    },
+    data: function() {
+      return {
+      }
+    },
+    name: 'Home',
+    props: ["meals"]
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
   @import '../../node_modules/bootstrap/less/bootstrap.less';
   @import '../less/variables.less';
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

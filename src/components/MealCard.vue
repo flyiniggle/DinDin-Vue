@@ -1,13 +1,13 @@
 <template>
   <div class="mealCard card">
-    <div class="row">
-      <div class="col-xs-4 align-middle">
+    <div class="row infoRow">
+      <div class="col-xs-4 text-center">
         <div class="mealStat card-block">
-          <h3>{{ meal.name }}</h3>
+          <h3 class="name">{{ meal.name }}</h3>
         </div>
       </div>
 
-      <div class="col-xs-4 align-middle">
+      <div class="col-xs-4 center-block">
         <div class="mealStat card-block">
           <span><strong>Prep Time:</strong> {{formattedPrepTime}} </span>
           <br/>
@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="col-xs-4 align-middle">
+      <div class="col-xs-4 text-center">
       <div class="mealStat card-block">
           <button type="button" class="btn btn-primary" @click="markUsed">Use it!</button>
         </div>
@@ -60,7 +60,7 @@
     },
     methods: {
     	markUsed: function() {
-    		console.log(this.meal.index)
+    		console.log(this.meal.index);
         this.$emit("used", this.meal.id)
       }
     }
@@ -75,9 +75,23 @@
     height: 80px;
     background-color: @brand-beige;
     border-bottom: 4px solid @brand-red;
+    margin-bottom: @padding-large-vertical;
+  }
+
+  .infoRow {
+    padding-top: @padding-large-vertical;
+  }
+
+  .name {
+    margin-top: 0;
   }
 
   .mealStat {
     display: inline-block;
+  }
+
+  .vertical-center {
+    vertical-align: middle;
+    height:100%;
   }
 </style>
