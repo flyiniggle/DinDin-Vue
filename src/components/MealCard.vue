@@ -25,6 +25,8 @@
 </template>
 
 <script>
+  import mediator from "@/mediator";
+
   export default {
     name: 'MealCard',
     props: ["meal"],
@@ -60,8 +62,7 @@
     },
     methods: {
     	markUsed: function() {
-    		console.log(this.meal.index);
-        this.$emit("used", this.meal.id)
+        mediator.$emit("mealUsed", this.meal.id, Date.now())
       }
     }
   }

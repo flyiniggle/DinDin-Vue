@@ -8,6 +8,17 @@ const MealService = {
       .then((response) => response.json())
       .catch(err => console.log(`Error: ${err}`));
 
+  },
+  async post(meals) {
+    console.log(meals)
+    return await fetch("http://localhost:3090/meals", {
+      method: "POST",
+      body: JSON.stringify(meals),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+      .catch(err => console.log(`Error: ${err}`));
   }
 };
 
