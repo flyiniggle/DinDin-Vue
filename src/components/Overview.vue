@@ -9,14 +9,14 @@
 
       <div class="col-xs-4 col-md-12">
         <h3>Most Prepared</h3>
-        <ul v-for="(i, meal) in mostPrepared" :key="i">
+        <ul v-for="(meal, i) in mostPrepared" :key="i">
           <li>{{meal.name}}</li>
         </ul>
       </div>
 
       <div class="col-xs-4 col-md-12">
         <h3>Least Prepared</h3>
-        <ul v-for="(i, meal) in leastPrepared" :key="i">
+        <ul v-for="(meal, i) in leastPrepared" :key="i">
           <li>{{meal.name}}</li>
         </ul>
       </div>

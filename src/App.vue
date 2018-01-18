@@ -20,7 +20,7 @@ export default {
   },
   mounted: function() {
     MealService.get()
-      .then((data) => console.log(data))
+      .then(data => this.meals = data)
   },
   components: {
     toolbar: Toolbar
