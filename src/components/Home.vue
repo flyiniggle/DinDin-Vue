@@ -7,9 +7,7 @@
         </div>
       </div>
       <div class="col-xs-12 col-md-8">
-        <div class="">
-          <meal-card></meal-card>
-        </div>
+          <meal-card v-for="(meal, i) in meals" :key="i" :meal="meal"></meal-card>
       </div>
     </div>
   </div>
@@ -23,12 +21,12 @@ export default {
     Overview,
     MealCard
   },
-  name: 'Home',
-  data () {
+  data: function() {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+  name: 'Home',
+  props: ["meals"]
 }
 </script>
 

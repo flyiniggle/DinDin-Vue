@@ -27,6 +27,7 @@
 <script>
   export default {
     name: 'Overview',
+    props: [],
     data: function() {
       return {
         lastMealName: "Turkey Goop",

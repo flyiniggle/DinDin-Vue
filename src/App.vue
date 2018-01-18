@@ -3,7 +3,7 @@
 <template>
   <div id="app">
     <toolbar></toolbar>
-    <router-view/>
+    <router-view :meals="meals"/>
   </div>
 </template>
 
@@ -32,6 +32,4 @@ export default {
 <style lang="less">
   @import '../node_modules/bootstrap/less/bootstrap.less';
   @import './less/variables.less';
-#app {
-}
 </style>
