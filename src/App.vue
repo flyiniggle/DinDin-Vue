@@ -8,12 +8,23 @@
 </template>
 
 <script>
+  import MealService from "@/services/meals";
+
   import Toolbar from "@/components/Toolbar.vue"
 
 export default {
-  	components: {
-      toolbar: Toolbar
-    },
+  data: function() {
+    return {
+    	meals: []
+    }
+  },
+  mounted: function() {
+    MealService.get()
+      .then((data) => console.log(data))
+  },
+  components: {
+    toolbar: Toolbar
+  },
   name: 'App'
 }
 </script>
