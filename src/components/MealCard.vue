@@ -16,7 +16,7 @@
       </div>
 
       <div class="col-xs-4 text-center">
-      <div class="mealStat card-block">
+        <div class="mealStat card-block">
           <button type="button" class="btn btn-primary" @click="markUsed">Use it!</button>
         </div>
       </div>
@@ -25,27 +25,33 @@
 </template>
 
 <script>
+  import moment from "moment";
   import mediator from "@/mediator";
 
   export default {
     name: 'MealCard',
     props: ["meal"],
     computed: {
-    	hours: function() {
-    		let hours = Math.floor(this.meal.prepTime / 60);
-
-    		if(hours === 0) {
-    			return "";
+      hours: function() {
+        let hours = Math.floor(parseInt(this.meal.prepTime) / 60);
+console.log(hours)
+        if(isNaN(hours)) {
+          return "";
+        }
+        else if(hours === 0) {
+          return "";
         } else if(hours === 1) {
-    			return `${hours} hour`;
+          return `${hours} hour`;
         } else {
-    			return `${hours} hours`;
+          return `${hours} hours`;
         }
       },
       minutes: function() {
-        let minutes = this.meal.prepTime % 60;
-
-        if(minutes === 0) {
+        let minutes = parseInt(this.meal.prepTime) % 60;
+console.log(minutes)
+        if(isNaN(minutes)) {
+          return "";
+        } else if(minutes === 0) {
           return "";
         } else if(minutes === 1) {
           return `${minutes} minute`;
@@ -53,15 +59,21 @@
           return `${minutes} minutes`;
         }
       },
-    	formattedPrepTime: function() {
+      formattedPrepTime: function() {
         return `${this.hours} ${this.minutes}`;
       },
       formattedLastUsed: function() {
-        return new Date(this.meal.lastUsed).toDateString();
+      	const date = moment(this.meal.lastUsed);
+
+        if(this.meal.lastUsed && date.isValid()) {
+        	return date.format("MMM Do, YYYY");
+        } else {
+          return "never used";
+        }
       }
     },
     methods: {
-    	markUsed: function() {
+      markUsed: function() {
         mediator.$emit("mealUsed", this.meal.id, Date.now())
       }
     }
@@ -93,6 +105,6 @@
 
   .vertical-center {
     vertical-align: middle;
-    height:100%;
+    height: 100%;
   }
 </style>

@@ -1,6 +1,16 @@
 <template>
   <div id="toolbar" class="container-fluid">
-    <img id="logo" src="@/assets/Din-Din Logo.png">
+    <div class="row">
+      <div class="col-xs-4 col-lg-1">
+        <img id="logo" src="~@/assets/Din-Din Logo.png">
+      </div>
+      <div class="col-xs-4 col-lg-2">
+        <router-link to="createMeal"><h3 class="nav">New Meal</h3></router-link>
+      </div>
+      <div class="col-xs-4 col-lg-2">
+        <router-link to="createMeal"><h3 class="nav">Random Meal</h3></router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -10,7 +20,7 @@
   }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
   @import '../../node_modules/bootstrap/less/bootstrap.less';
   @import '../less/variables.less';
   #toolbar {
@@ -21,5 +31,9 @@
   #logo {
     display: inline-block;
     float: left;
+  }
+
+  .nav, .nav:hover, .nav:visited {
+    color: @brand-orange;
   }
 </style>

@@ -45,6 +45,7 @@ export default {
   },
   created: function() {
     mediator.$on("mealUsed", this.markUsed);
+    mediator.$on("saveMeal", this.saveMeal)
   },
   mounted: function() {
     MealService.get()
@@ -52,9 +53,9 @@ export default {
       .then(data => this.meals = data)
   },
   methods: {
-  	markUsed: function(mealIndex, date) {
+  	markUsed: function(mealIndex, data) {
       let meal = this.meals[mealIndex];
-      const changeSet = {lastUsed: date}
+      const changeSet = {lastUsed: data}
       const updateMealAtIndex = pipe(updateMeal, changeAtIndex)(changeSet)(mealIndex);
 
       this.meals = pipe(
@@ -63,10 +64,26 @@ export default {
 
       pipe(
       	map(unIdentifyMeal),
-        trace("meals "),
         MealService.post
       )(this.meals);
 
+    },
+    saveMeal: function(data, idx) {
+  		if (idx) {
+        const updateMealAtIndex = pipe(updateMeal, changeAtIndex)(changeSet)(mealIndex);
+
+        this.meals = pipe(
+          map(updateMealAtIndex),
+        )(this.meals);
+      } else {
+  			console.log(data)
+  			this.meals.push(data)
+      }
+
+      pipe(
+        map(unIdentifyMeal),
+        MealService.post
+      )(this.meals);
     }
   },
   components: {
