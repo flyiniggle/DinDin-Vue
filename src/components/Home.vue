@@ -7,7 +7,13 @@
         </div>
       </div>
       <div class="col-xs-12 col-md-8">
-          <meal-card v-for="(meal, i) in meals" :key="i" :meal="meal"></meal-card>
+          <meal-card v-for="(meal, i) in meals"
+                     :key="i"
+                     :id="meal.id"
+                     :name="meal.name"
+                     :prepTime="meal.prepTime"
+                     :lastUsed="meal.lastUsed"
+          ></meal-card>
       </div>
     </div>
   </div>

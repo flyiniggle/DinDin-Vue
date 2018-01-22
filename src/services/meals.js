@@ -10,7 +10,6 @@ const MealService = {
 
   },
   async post(meals) {
-    console.log(meals)
     return await fetch("http://localhost:3090/meals", {
       method: "POST",
       body: JSON.stringify(meals),

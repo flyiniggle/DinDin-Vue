@@ -3,7 +3,7 @@
     <div class="row infoRow">
       <div class="col-xs-4 text-center">
         <div class="mealStat card-block">
-          <h3 class="name">{{ meal.name }}</h3>
+          <h3 class="name">{{ name }}</h3>
         </div>
       </div>
 
@@ -30,10 +30,22 @@
 
   export default {
     name: 'MealCard',
-    props: ["meal"],
+    props: {
+    	id: {
+    		type: Number
+      },
+      name: {
+    		type: String,
+        default: ""
+      },
+      lastUsed: {
+    		type: Number,
+        default: NaN
+      }
+    },
     computed: {
       hours: function() {
-        let hours = Math.floor(parseInt(this.meal.prepTime) / 60);
+        let hours = Math.floor(parseInt(this.prepTime) / 60);
 
         if(isNaN(hours)) {
           return "";
@@ -47,7 +59,7 @@
         }
       },
       minutes: function() {
-        let minutes = parseInt(this.meal.prepTime) % 60;
+        let minutes = parseInt(this.prepTime) % 60;
 
         if(isNaN(minutes)) {
           return "";
@@ -63,9 +75,9 @@
         return `${this.hours} ${this.minutes}`;
       },
       formattedLastUsed: function() {
-      	const date = moment(this.meal.lastUsed);
+      	const date = moment(this.lastUsed);
 
-        if(this.meal.lastUsed && date.isValid()) {
+        if(this.lastUsed && date.isValid()) {
         	return date.format("MMM Do, YYYY");
         } else {
           return "never used";
@@ -74,7 +86,7 @@
     },
     methods: {
       markUsed: function() {
-        mediator.$emit("mealUsed", this.meal.id, Date.now())
+        mediator.$emit("mealUsed", this.id, Date.now())
       }
     }
   }
