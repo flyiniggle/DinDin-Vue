@@ -54,8 +54,12 @@ export default {
   },
   methods: {
   	markUsed: function(mealIndex, data) {
-      let meal = this.meals[mealIndex];
-      const changeSet = {lastUsed: data}
+      const meal = this.meals[mealIndex];
+      const usedCount = meal.usedCount || 0;
+      const changeSet = {
+      	lastUsed: data,
+        usedCount: usedCount + 1
+      }
       const updateMealAtIndex = pipe(updateMeal, changeAtIndex)(changeSet)(mealIndex);
 
       this.meals = pipe(
