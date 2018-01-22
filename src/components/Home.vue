@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-4">
         <div class="">
-          <overview></overview>
+          <overview :meals="meals"></overview>
         </div>
       </div>
       <div class="col-xs-12 col-md-8">

@@ -61,7 +61,7 @@
     	save: function() {
     		const data = {
     			name: this.name || "no name",
-          prepTime: this.prepTime.toString(),
+          prepTime: parseInt(this.prepTime),
           taste: this.taste.toString(),
           difficulty: this.difficulty.toString()
         }

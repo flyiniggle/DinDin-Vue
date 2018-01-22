@@ -9,14 +9,14 @@
 
       <div class="col-xs-4 col-md-12">
         <h3>Most Prepared</h3>
-        <ul v-for="(meal, i) in mostPrepared" :key="i">
+        <ul class="list-unstyled" v-for="(meal, i) in mostPrepared" :key="i">
           <li>{{meal.name}}</li>
         </ul>
       </div>
 
       <div class="col-xs-4 col-md-12">
         <h3>Least Prepared</h3>
-        <ul v-for="(meal, i) in leastPrepared" :key="i">
+        <ul class="list-unstyled" v-for="(meal, i) in leastPrepared" :key="i">
           <li>{{meal.name}}</li>
         </ul>
       </div>
@@ -25,21 +25,25 @@
 </template>
 
 <script>
+  import {sortMostUsed, sortRecentlyPrepared} from"@/business/meals"
   export default {
     name: 'Overview',
-    props: [],
-    data: function() {
-      return {
-        lastMealName: "Turkey Goop",
-        mostPrepared: [
-          {name: "tukey Goop"},
-          {name: "Refritos"},
-          {name: "Gnocci"}
-        ],
-        leastPrepared: [
-          {name: "Cabbage Rolls"},
-          {name: "Braised Short Ribs"}
-        ]
+    props: ["meals"],
+    computed: {
+    	mostPrepared: function() {
+        return sortMostUsed(this.meals).slice(0, 3);
+      },
+      leastPrepared: function() {
+        return sortMostUsed(this.meals).reverse().slice(0, 3)
+      },
+      lastMealName: function() {
+    		const lastMeal = sortRecentlyPrepared(this.meals)[0];
+
+    		if(lastMeal && lastMeal.hasOwnProperty("name")) {
+    			return lastMeal.name;
+        } else {
+    			return "";
+        }
       }
     }
   }
@@ -51,5 +55,14 @@
 
   #overview {
     background-color: @brand-beige;
+    padding: @padding-large-vertical;
+  }
+
+  h3 {
+    color: @brand-brown;
+  }
+
+  span, li {
+    color: @brand-red;
   }
 </style>

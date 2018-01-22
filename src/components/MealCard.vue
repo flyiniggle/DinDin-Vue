@@ -41,6 +41,9 @@
       lastUsed: {
     		type: Number,
         default: NaN
+      },
+      prepTime: {
+    		type: Number
       }
     },
     computed: {
