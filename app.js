@@ -4,6 +4,8 @@ const fs = require("fs");
 const express = require('express');
 const bodyParser = require("body-parser");
 
+const MealsService = require("./src/server/services/meals");
+
 
 // Setup
 const app = express();
@@ -25,35 +27,24 @@ app.all("/meals", function(req, res, next) {
 });
 
 app.get("/meals", function(req, res) {
-  new Promise(function(resolve, reject) {
-    fs.readFile("./data/meals.json", (err, data) => {
-      if(err) reject(err);
-      resolve(data)
-    });
-  })
-    .then(JSON.parse)
+  MealsService.read()
     .then(function(data) {
       res.status(200).send(data);
     })
     .catch(function(err) {
       res.status(400).send(err);
-    })
+    });
 });
 
 app.post("/meals", function(req, res) {
-  new Promise(function(resolve, reject) {
-    fs.writeFile("./data/meals.json", JSON.stringify(req.body), (err) => {
-      if(err) reject(err);
-      resolve()
-    })
-  })
+  MealsService.write(req.body)
     .catch(function(err) {
       console.log(err);
       res.status(400).send(err);
     })
     .then(function() {
       res.status(200).send()
-    })
+    });
 })
 
 app.listen(3090, function() {
