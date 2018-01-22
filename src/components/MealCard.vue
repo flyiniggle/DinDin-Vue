@@ -34,7 +34,7 @@
     computed: {
       hours: function() {
         let hours = Math.floor(parseInt(this.meal.prepTime) / 60);
-console.log(hours)
+
         if(isNaN(hours)) {
           return "";
         }
@@ -48,7 +48,7 @@ console.log(hours)
       },
       minutes: function() {
         let minutes = parseInt(this.meal.prepTime) % 60;
-console.log(minutes)
+
         if(isNaN(minutes)) {
           return "";
         } else if(minutes === 0) {

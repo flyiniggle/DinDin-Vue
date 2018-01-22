@@ -76,7 +76,6 @@ export default {
           map(updateMealAtIndex),
         )(this.meals);
       } else {
-  			console.log(data)
   			this.meals.push(data)
       }
 
