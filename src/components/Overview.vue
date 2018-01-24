@@ -6,7 +6,6 @@
         <span>{{lastMealName}}</span>
       </div>
 
-
       <div class="col-xs-4 col-md-12">
         <h3>Most Prepared</h3>
         <ul class="list-unstyled" v-for="(meal, i) in mostPrepared" :key="i">

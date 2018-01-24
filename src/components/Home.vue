@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
+      <div class="col-xs-12">
+        <filter-controls :meals="meals"></filter-controls>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-xs-12 col-md-4">
         <div class="">
           <overview :meals="meals"></overview>
@@ -20,10 +25,12 @@
 </template>
 
 <script>
+  import FilterControls from "@/components/FilterControls/FilterControls"
   import MealCard from "@/components/MealCard";
   import Overview from "@/components/Overview";
   export default {
     components: {
+    	FilterControls,
       Overview,
       MealCard
     },

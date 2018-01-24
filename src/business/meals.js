@@ -20,7 +20,19 @@ function sortRecentlyPrepared(meals = []) {
   return Array.from(meals).sort(compareLastUsed);
 }
 
+function compareId(mealA, mealB) {
+  const mealAId = mealA.id || 0;
+  const mealBId = mealB.id || 0;
+
+  return mealBId - mealAId;
+}
+
+function sortById(meals = []) {
+  return Array.from(meals).sort(compareId)
+}
+
 export {
   sortMostUsed,
-  sortRecentlyPrepared
+  sortRecentlyPrepared,
+  sortById
 }

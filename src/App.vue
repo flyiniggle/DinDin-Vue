@@ -30,7 +30,7 @@
   const updateMeal = curry((changes, meal) => Object.assign(meal, changes));
 
   const changeAtIndex = curry(function(fx, targetIdx, target, currentIdx) {
-  	if(currentIdx === targetIdx) {
+  	if(target.id === targetIdx) {
   		return fx(target);
     } else {
   		return target
@@ -46,6 +46,7 @@ export default {
   created: function() {
     mediator.$on("mealUsed", this.markUsed);
     mediator.$on("saveMeal", this.saveMeal)
+    mediator.$on("sorted", (meals) => this.meals = meals)
   },
   mounted: function() {
     MealService.get()
