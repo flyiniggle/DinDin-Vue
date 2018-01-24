@@ -7,7 +7,6 @@
     props: ["sortName", "active", "sorter"],
     methods: {
     	toggleSelected: function() {
-    		console.log(this.active)
         if(!this.active) {
           this.$emit("selected", this.sortName, this.sorter);
         } else {
@@ -17,7 +16,7 @@
     },
     render: function(h) {
       return (
-      	<h4 class={ this.active ? "selected" : "" } onClick={ this.toggleSelected }> { this.$slots.default } </h4>
+      	<h4 class={ this.active ? "selected" : "" } onClick={ this.toggleSelected }>{ this.$slots.default }</h4>
       )
     }
   }

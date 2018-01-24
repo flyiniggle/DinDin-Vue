@@ -1,5 +1,5 @@
 <script>
-  import { forEachObjIndexed } from "ramda";
+  import { pipe, reverse } from "ramda";
 
   import mediator from "@/mediator";
   import SortOption from "@/components/FilterControls/SortOption";
@@ -22,7 +22,10 @@
     methods: {
     	sortRecentlyPrepared,
       sortLongestUnused: function(meals) {
-        return sortRecentlyPrepared(this.meals).reverse();
+    		return pipe(
+    			sortRecentlyPrepared,
+          reverse
+        )(this.meals)
       },
       handleSorting: function(sortName, sorter) {
     		this.selected = sortName;
