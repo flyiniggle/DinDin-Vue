@@ -24,16 +24,21 @@
 </template>
 
 <script>
+  import {last, map, pipe, reverse, slice} from 'ramda';
+
   import {sortMostUsed, sortRecentlyPrepared} from"@/business/meals"
+
+  const getFirstThree = slice(0, 3);
+
   export default {
     name: 'Overview',
     props: ["meals"],
     computed: {
     	mostPrepared: function() {
-        return sortMostUsed(this.meals).slice(0, 3);
+        return pipe(sortMostUsed, getFirstThree)(this.meals);
       },
       leastPrepared: function() {
-        return sortMostUsed(this.meals).reverse().slice(0, 3)
+        return pipe(sortMostUsed, reverse, getFirstThree)(this.meals)
       },
       lastMealName: function() {
     		const lastMeal = sortRecentlyPrepared(this.meals)[0];
