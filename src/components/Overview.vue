@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import {sortMostUsed, sortRecentlyPrepared} from"@/business/meals"
+  import {sortMostUsed, sortRecentlyPrepared} from"@/business/sorting"
   export default {
     name: 'Overview',
     props: ["meals"],
