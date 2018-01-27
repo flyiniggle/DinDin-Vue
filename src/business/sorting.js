@@ -34,6 +34,7 @@ function sortById(meals = []) {
 export {
   returnMoreUsed,
   sortMostUsed,
+  compareLastUsed,
   sortRecentlyPrepared,
   sortById
 }
