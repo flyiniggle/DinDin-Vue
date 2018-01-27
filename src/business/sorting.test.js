@@ -142,4 +142,24 @@ describe("#business/sorting", function() {
       expect(result).toEqual(0);
     });
   });
+
+  describe("#sortById", function() {
+    it("should sort by lowest ID first", function() {
+      const start = [
+        { id: 2 },
+        { id: 0 },
+        { id: 3 },
+        { id: 1 }
+      ]
+      const expected = [
+        { id: 0 },
+        { id: 1 },
+        { id: 2 },
+        { id: 3 }
+      ]
+      const results = Sorting.sortById(start);
+
+      expect(results).toEqual(expected);
+    });
+  });
 });
