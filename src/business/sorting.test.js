@@ -87,5 +87,59 @@ describe("#business/sorting", function() {
 
       expect(result).toEqual(0);
     });
-  })
+  });
+
+  describe("#sortRecentlyPrepared", function() {
+    it("should sort by most recently prepared", function() {
+      const start = [
+        { lastUsed: 12 },
+        { lastUsed: 3 },
+        { lastUsed: 100 },
+        { lastUsed: 45 }
+      ]
+      const expected = [
+        { lastUsed: 100 },
+        { lastUsed: 45 },
+        { lastUsed: 12 },
+        { lastUsed: 3 }
+      ]
+      const results = Sorting.sortRecentlyPrepared(start);
+
+      expect(results).toEqual(expected);
+    });
+  });
+
+  describe("#compareId", function() {
+    it("should return less than 0", function() {
+      const a = { id: 1 };
+      const b = { id: 2 };
+      const result = Sorting.compareId(a, b);
+
+      expect(result).toBeLessThan(0);
+    });
+
+    it("should return greater than 0", function() {
+      const a = { id: 2 };
+      const b = { id: 1 };
+      const result = Sorting.compareId(a, b);
+
+      expect(result).toBeGreaterThan(0);
+    });
+
+    it("should return 0", function() {
+      const a = { id: 0 };
+      const b = { id: 0 };
+      const result = Sorting.compareId(a, b);
+
+      expect(result).toEqual(0);
+    });
+
+    it("should return 0", function() {
+      const a = {};
+      const b = {};
+      const result = Sorting.compareId(a, b);
+
+      expect(result).toEqual(0);
+    });
+  });
 });
