@@ -1,4 +1,5 @@
 import {mount} from '@vue/test-utils'
+import * as sinon from 'sinon';
 import MealCard from '@/components/MealCard'
 
 describe('MealCard.vue', function() {
@@ -77,6 +78,19 @@ describe('MealCard.vue', function() {
       let expected = "Jan 27th, 2018";
 
       expect(MealCard.computed.formattedLastUsed.call(propsData)).toEqual(expected);
+    });
+  });
+
+  describe("#Use It button", function() {
+    it("should call markUsed.", function() {
+      const wrapper = mount(MealCard);
+
+      let spy = sinon.spy(wrapper.vm, "markUsed");
+      //TODO - figure out why this needs to be called twice
+      wrapper.find("button").trigger("click");
+      wrapper.find("button").trigger("click");
+
+      expect(spy.called).toBeTruthy();
     });
   });
 });
