@@ -1,4 +1,4 @@
-import {addIndex, curry, evolve, inc, map, omit, when} from "ramda";
+import {addIndex, assoc, curry, evolve, inc, has, map, omit, pipe, when} from "ramda";
 
 
 const mapWithIndex = addIndex(map);
@@ -18,10 +18,11 @@ const unIdentifyMealsList = map(unIdentifyMeal);
 const mealMatchesId = curry((id, meal) => meal.id === id);
 
 
-const useMeal = evolve({
-  lastUsed: () => Date.now(),
-  usedCount: inc
-});
+const useMeal = pipe(
+  assoc("lastUsed", Date.now()),
+  when((meal) => !has("usedCount", meal), assoc("usedCount", 0)),
+  evolve({ usedCount: inc })
+);
 
 const findAndUseMeal = function(id, meals) {
   let useMealWhenIdMatches = when(mealMatchesId(id), useMeal);

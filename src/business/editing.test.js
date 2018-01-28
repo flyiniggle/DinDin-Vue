@@ -108,4 +108,74 @@ describe("#editing", function() {
       expect(Editing.mealMatchesId(1, meal)).toBeFalsy();
     })
   });
+
+  describe("#useMeal", function() {
+    it("should set the lastUsed property to today's date.", function() {
+      const meal = {lastUsed: 0, usedCount: 0};
+      const result = Editing.useMeal(meal);
+      const expectedDate = new Date();
+      const expectedDay = expectedDate.getDay();
+      const expectedMonth = expectedDate.getMonth();
+      const expectedYear = expectedDate.getFullYear();
+      const resultDate = new Date(result.lastUsed);
+
+      expect(resultDate.getDay()).toEqual(expectedDay);
+      expect(resultDate.getMonth()).toEqual(expectedMonth);
+      expect(resultDate.getFullYear()).toEqual(expectedYear);
+    });
+
+    it("should create a lastUsed property if none exists.", function() {
+      const meal = {usedCount: 0};
+      const result = Editing.useMeal(meal);
+      const expectedDate = new Date();
+      const expectedDay = expectedDate.getDay();
+      const expectedMonth = expectedDate.getMonth();
+      const expectedYear = expectedDate.getFullYear();
+      const resultDate = new Date(result.lastUsed);
+
+      expect(resultDate.getDay()).toEqual(expectedDay);
+      expect(resultDate.getMonth()).toEqual(expectedMonth);
+      expect(resultDate.getFullYear()).toEqual(expectedYear);
+    });
+
+    it("should increment usedCount.", function() {
+      const meal = {lastUsed: 0, usedCount: 0};
+      const result = Editing.useMeal(meal);
+
+      expect(result.usedCount).toEqual(1);
+    });
+
+    it("should create a usedCount property if none exists.", function() {
+      const meal = {lastUsed: 0};
+      const result = Editing.useMeal(meal);
+
+      expect(result.usedCount).toEqual(1);
+    });
+  });
+
+  describe("#findAndUseMeal", function() {
+    it("should mark the meal with the specified ID as used.", function() {
+      const meals = [
+        {id: 1, usedCount: 0},
+        {id: 2, usedCount: 0},
+        {id: 3, usedCount: 0},
+        {id: 4, usedCount: 0},
+        {id: 5, usedCount: 0},
+        {id: 6, usedCount: 0},
+        {id: 7, usedCount: 0},
+      ];
+      const results = Editing.findAndUseMeal(4, meals);
+      const targetResult = results[3];
+      const expectedDate = new Date();
+      const expectedDay = expectedDate.getDay();
+      const expectedMonth = expectedDate.getMonth();
+      const expectedYear = expectedDate.getFullYear();
+      const resultDate = new Date(targetResult.lastUsed);
+
+      expect(resultDate.getDay()).toEqual(expectedDay);
+      expect(resultDate.getMonth()).toEqual(expectedMonth);
+      expect(resultDate.getFullYear()).toEqual(expectedYear);
+      expect(targetResult.usedCount).toEqual(1)
+    });
+  });
 });
