@@ -47,4 +47,51 @@ describe("#editing", function() {
       expect(results).toEqual(expected);
     });
   });
+
+  describe("#unIdentifyMeal", function() {
+    it("should remove an id property from an object.", function() {
+      let obj = {id: 1};
+      let result = Editing.unIdentifyMeal(obj);
+
+      expect(result).not.toHaveProperty("id");
+    });
+
+    it("should return a new object.", function() {
+      let obj = {id: 1};
+      let result = Editing.unIdentifyMeal(obj);
+
+      expect(result).not.toBe(obj);
+    });
+
+    it("should not do anything if the object has no id.", function() {
+      let obj = {};
+      let result = Editing.unIdentifyMeal(obj);
+
+      expect(result).not.toHaveProperty("id");
+    });
+  })
+
+  describe("#unIdentifyMealsList", function() {
+    it("should remove an id property from each meal in a list.", function() {
+      const expected = [
+        {obj: 1},
+        {obj: 2},
+        {obj: 3},
+        {obj: 4},
+        {obj: 5},
+        {obj: 6}
+      ];
+      const start = [
+        {obj: 1, id: 0},
+        {obj: 2, id: 1},
+        {obj: 3, id: 2},
+        {obj: 4, id: 3},
+        {obj: 5, id: 4},
+        {obj: 6, id: 5}
+      ];
+      const results = Editing.unIdentifyMealsList(start);
+
+      expect(results).toEqual(expected);
+    });
+  });
 });

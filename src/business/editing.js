@@ -7,7 +7,7 @@ const identifyMeal = (meal, id) => Object.assign({id}, meal);
 
 const identifyMealsList = mapWithIndex(identifyMeal);
 
-const unIdentifyMeal = (meal) => omit("id", meal);
+const unIdentifyMeal = omit(["id"]);
 
 const unIdentifyMealsList = map(unIdentifyMeal);
 
