@@ -94,4 +94,18 @@ describe("#editing", function() {
       expect(results).toEqual(expected);
     });
   });
+
+  describe("#mealMatchesId", function() {
+    it("should return true when the meal id matches the given id.", function() {
+      const meal = {id: 1};
+
+      expect(Editing.mealMatchesId(1, meal)).toBeTruthy();
+    });
+
+    it("should return false when the meal id doesn't match the given id.", function() {
+      const meal = {id: 5};
+
+      expect(Editing.mealMatchesId(1, meal)).toBeFalsy();
+    })
+  });
 });
