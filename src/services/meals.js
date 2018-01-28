@@ -7,7 +7,6 @@ const MealService = {
       })})
       .then((response) => response.json())
       .catch(err => console.log(`Error: ${err}`));
-
   },
   async post(meals) {
     return await fetch("http://localhost:3090/meals", {

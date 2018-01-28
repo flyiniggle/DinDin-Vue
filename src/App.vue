@@ -1,5 +1,3 @@
-
-
 <template>
   <div id="app">
     <toolbar></toolbar>
@@ -11,21 +9,9 @@
   import { map, pipe, curry, trace } from "@/utils/fp";
   import MealService from "@/services/meals";
   import mediator from "@/mediator";
+  import * as Editing from "@/business/editing";
 
   import Toolbar from "@/components/Toolbar.vue"
-
-  const identifyMeal = (meal, id) => Object.assign({id}, meal);
-
-  const unIdentifyMeal = function(meal) {
-  	let unidentifiedMeal = {};
-
-    for(let prop in meal) {
-    	if(meal.hasOwnProperty(prop) && prop !== "id") {
-    		unidentifiedMeal[prop] = meal[prop];
-      }
-    }
-    return unidentifiedMeal
-  }
 
   const updateMeal = curry((changes, meal) => Object.assign(meal, changes));
 
@@ -50,28 +36,17 @@ export default {
   },
   mounted: function() {
     MealService.get()
-      .then(map(identifyMeal))
+      .then(Editing.identifyMealsList)
       .then(data => this.meals = data)
   },
   methods: {
-  	markUsed: function(mealIndex, data) {
-      const meal = this.meals[mealIndex];
-      const usedCount = meal.usedCount || 0;
-      const changeSet = {
-      	lastUsed: data,
-        usedCount: usedCount + 1
-      }
-      const updateMealAtIndex = pipe(updateMeal, changeAtIndex)(changeSet)(mealIndex);
-
-      this.meals = pipe(
-      	map(updateMealAtIndex),
-      )(this.meals);
+  	markUsed: function(mealIndex) {
+      this.meals = Editing.findAndUseMeal(mealIndex, this.meals);
 
       pipe(
-      	map(unIdentifyMeal),
+        Editing.unIdentifyMealsList,
         MealService.post
       )(this.meals);
-
     },
     saveMeal: function(data, idx) {
   		if (idx) {
@@ -85,7 +60,7 @@ export default {
       }
 
       pipe(
-        map(unIdentifyMeal),
+        map(Editing.unIdentifyMealsList),
         MealService.post
       )(this.meals);
     }
