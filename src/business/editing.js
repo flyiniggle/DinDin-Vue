@@ -30,6 +30,8 @@ const findAndUseMeal = function(id, meals) {
   return map(useMealWhenIdMatches, meals);
 };
 
+const updateMeal = curry((changes, meal) => Object.assign(meal, changes));
+
 export {
   identifyMeal,
   identifyMealsList,
@@ -37,5 +39,6 @@ export {
   unIdentifyMealsList,
   mealMatchesId,
   useMeal,
-  findAndUseMeal
+  findAndUseMeal,
+  updateMeal
 };

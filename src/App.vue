@@ -6,22 +6,12 @@
 </template>
 
 <script>
-  import { map, pipe, curry, trace } from "@/utils/fp";
+  import { map, pipe, curry, when } from "ramda";
   import MealService from "@/services/meals";
   import mediator from "@/mediator";
   import * as Editing from "@/business/editing";
 
   import Toolbar from "@/components/Toolbar.vue"
-
-  const updateMeal = curry((changes, meal) => Object.assign(meal, changes));
-
-  const changeAtIndex = curry(function(fx, targetIdx, target, currentIdx) {
-  	if(target.id === targetIdx) {
-  		return fx(target);
-    } else {
-  		return target
-    }
-  });
 
 export default {
   data: function() {
@@ -49,18 +39,20 @@ export default {
       )(this.meals);
     },
     saveMeal: function(data, idx) {
-  		if (idx) {
-        const updateMealAtIndex = pipe(updateMeal, changeAtIndex)(changeSet)(mealIndex);
+      if (idx) {
+        const isMatchingMeal = Editing.mealMatchesId(idx);
+        const saveChanges = Editing.updateMeal(data);
 
-        this.meals = pipe(
-          map(updateMealAtIndex),
-        )(this.meals);
+        this.meals = map(
+          when(isMatchingMeal, saveChanges),
+          this.meals
+        );
       } else {
-  			this.meals.push(data)
+        this.meals.push(data)
       }
 
       pipe(
-        map(Editing.unIdentifyMealsList),
+        Editing.unIdentifyMealsList,
         MealService.post
       )(this.meals);
     }
