@@ -3,7 +3,7 @@
 
   import mediator from "@/mediator";
   import SortOption from "@/components/FilterControls/SortOption";
-  import { sortRecentlyPrepared, sortById } from "@/business/meals";
+  import { sortRecentlyPrepared, sortById } from "@/business/sorting";
 
   export default {
     components: {SortOption},

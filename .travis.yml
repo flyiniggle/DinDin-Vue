@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '6'
+install:
+- npm install
+script:
+- npm build
+- npm test
+deploy:
+  provider: heroku
+  app: dindin-vue
+  api_key:
+    secure: DtRzJXZWxU2GxuQ8hFAGnTTDLVTM9zdkZJjxhVE+aP1tSvGtSvlDQnTVWirG7NV9o0t/UTnuDSt4GMvrd2MgnVSxDqh+1P33MXSoiomnq2UoX38yKXgllJFkhcwRHcYIira/VOcZfct3769BNOZmE/r4NA3+gTdeV9gQh7X/pLkckengJHd34eCJ6M/T+1mGNxvPXiX/dd3lUB01FCM18D/vY7JacyI9vrNVdISFmBEtJcaGGCLddTBdF6MlXz4+l84VvLUE0TjidXKyGd7stSBM9FDxrg2uhxfCj5hP4ynYNy+zu5zc0KONS10OBixXNDezPxC+DR3vnri6UfiAr48WlEoPH4Ak5hBFVI1tr1tvOzYVGVNH7Ob3XJ+8aPnqHdUz6y2EFc3ffBK/Ql2n2fRDFXO+oyOYZHhvndJ5LUH/wWaGj3xUpCnYVHUI4RUocLc4pyRdxuHWm9Hl43Zv9eQNGOmxBqbFUndiCP7mv14cY4emQ2LTKG1U0UvCeg5vYHgwj5t02Hsv0x6Ie0VAZiDH1ybcipcVFlLvDa6Td9s0x5Q9Ul6yTd9aTpkIfWKw0cd9n3woBBgGA9jOB40A6J+ZbZFPQwQpZCJAOzDmEiJfIiVuq+2xekUiK+FXIm7AhBw1DEekSiBVjLz/Vc3Lzophd4pIahBQkVxbWpmCD2g=

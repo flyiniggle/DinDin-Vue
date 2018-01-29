@@ -25,8 +25,7 @@
 
 <script>
   import {last, map, pipe, reverse, slice} from 'ramda';
-
-  import {sortMostUsed, sortRecentlyPrepared} from"@/business/meals"
+  import {sortMostUsed, sortRecentlyPrepared} from"@/business/sorting";
 
   const getFirstThree = slice(0, 3);
 
